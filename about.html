@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Ifeoluwa Salau — education, skills and interests." />
+  <title>About — Ifeoluwa Salau</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-logo" style="transform: translateY(20px)">
+      <span class="accent">&lt;</span>ifeoluwa<span class="accent">/&gt;</span>
+    </div>
+    <div class="preloader-bar">
+      <div class="preloader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Noise overlay -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Background effects -->
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <canvas id="code-rain" aria-hidden="true"></canvas>
+
+  <header class="navbar">
+    <nav class="container navbar-inner" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo font-mono"><span class="accent">&lt;</span>ifeoluwa<span class="accent">/&gt;</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </nav>
+    <ul class="nav-mobile">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="planner.html">Planner</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <section class="page">
+      <div class="container">
+        <p class="eyebrow">// about me</p>
+        <h1 class="page-title">Get to know me</h1>
+
+        <div class="about-grid">
+          <div class="card glass glass-hover span-7 reveal">
+            <div class="card-head">
+              <i data-lucide="graduation-cap" class="icon-cyan"></i>
+              <h2>Educational Background</h2>
+            </div>
+            <p class="body">I'm currently studying Computer Software Engineering at Miva Open University. Along the way, I've been learning programming, web development, and software design through coursework and personal projects. Every project helps me become a better developer.</p>
+          </div>
+
+          <div class="card glass glass-hover span-5 reveal" style="--delay: 0.1s">
+            <div class="card-head">
+              <i data-lucide="target" class="icon-pink"></i>
+              <h2>Career Aspirations</h2>
+            </div>
+            <p class="body">I'm working toward becoming a full-stack software engineer. I want to build web applications that are fast, reliable, and useful, while continuing to learn, take on new challenges, and grow as a developer.</p>
+          </div>
+
+          <div class="card glass glass-hover span-7 reveal">
+            <div class="card-head">
+              <i data-lucide="cpu" class="icon-cyan"></i>
+              <h2>Technical Skills</h2>
+            </div>
+            <div id="skills-list"></div>
+          </div>
+
+          <div class="card glass glass-hover span-5 reveal" style="--delay: 0.1s">
+            <div class="card-head">
+              <i data-lucide="heart" class="icon-pink"></i>
+              <h2>Hobbies &amp; Interests</h2>
+            </div>
+            <ul class="hobby-list" id="hobbies-list"></ul>
+          </div>
+        </div>
+
+        <div class="facts-grid font-mono">
+          <div class="fact glass reveal">
+            <p class="k">Name</p>
+            <p>Ifeoluwa Salau</p>
+          </div>
+          <div class="fact glass reveal" style="--delay: 0.1s">
+            <p class="k">Field</p>
+            <p>Software Engineering Student @ Miva Open University</p>
+          </div>
+          <div class="fact glass reveal" style="--delay: 0.2s">
+            <p class="k">Location</p>
+            <p>Lagos &middot; Nigeria</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p class="copy">&copy; <span id="year"></span> Ifeoluwa Salau</p>
+      <div class="footer-socials">
+        <a href="https://github.com/lfeoluwa022/ifeoluwa.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+        <a href="https://www.linkedin.com/in/ifeoluwa-salau-a155783b8" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        <a href="mailto:Ifeoluwasalau2007@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- App -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/about.js"></script>
+</body>
+</html>
