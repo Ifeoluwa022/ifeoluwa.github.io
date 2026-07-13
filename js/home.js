@@ -1,4 +1,4 @@
-/* Home page: typing terminal animation. */
+/* Home page: typing terminal animation + ambient audio toggle. */
 
 const TERMINAL_LINES = [
   { prompt: "$ whoami", output: "ifeoluwa-salau" },
@@ -74,92 +74,44 @@ function typeTerminal() {
   typeLine();
 }
 
-// ── Welcome audio player ──
-function initAudioPlayer() {
-  const audio = document.getElementById("welcome-audio");
-  const playBtn = document.getElementById("audio-play-btn");
-  const player = document.querySelector(".audio-player");
-  if (!audio || !playBtn || !player) return;
+// ── Ambient audio toggle ──
+function initAmbientAudio() {
+  const audio = document.getElementById("ambient-audio");
+  const toggle = document.getElementById("ambient-toggle");
+  const icon = document.getElementById("ambient-icon");
+  if (!audio || !toggle || !icon) return;
 
-  const progressFill = document.getElementById("audio-progress-fill");
-  const progressWrap = document.getElementById("audio-progress-wrap");
-  const currentEl = document.getElementById("audio-current");
-  const totalEl = document.getElementById("audio-total");
-  const durationEl = document.getElementById("audio-duration");
+  let isPlaying = false;
 
-  let hasError = false;
+  // Browsers block autoplay, so we start muted and wait for user interaction.
+  audio.volume = 0.15;
 
-  function fmt(sec) {
-    if (!sec || !isFinite(sec)) return "0:00";
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return m + ":" + String(s).padStart(2, "0");
-  }
-
-  // Handle missing audio file gracefully
-  audio.addEventListener("error", () => {
-    hasError = true;
-    player.classList.add("has-error");
-  });
-
-  audio.addEventListener("loadedmetadata", () => {
-    const dur = fmt(audio.duration);
-    if (totalEl) totalEl.textContent = dur;
-    if (durationEl) durationEl.textContent = dur;
-  });
-
-  audio.addEventListener("timeupdate", () => {
-    if (!audio.duration) return;
-    const pct = (audio.currentTime / audio.duration) * 100;
-    if (progressFill) progressFill.style.width = pct + "%";
-    if (currentEl) currentEl.textContent = fmt(audio.currentTime);
-  });
-
-  audio.addEventListener("ended", () => {
-    player.classList.remove("is-playing");
-    playBtn.classList.remove("playing");
-    updatePlayIcon(false);
-    if (progressFill) progressFill.style.width = "0%";
-    if (currentEl) currentEl.textContent = "0:00";
-  });
-
-  function updatePlayIcon(isPlaying) {
-    const icon = document.getElementById("play-icon");
-    if (icon) icon.setAttribute("data-lucide", isPlaying ? "pause" : "play");
-    if (window.lucide) lucide.createIcons({ nameAttr: "data-lucide" });
-  }
-
-  playBtn.addEventListener("click", () => {
-    if (hasError) return;
-    if (audio.paused) {
-      audio.play().then(() => {
-        player.classList.add("is-playing");
-        playBtn.classList.add("playing");
-        updatePlayIcon(true);
-      }).catch(() => {});
-    } else {
+  toggle.addEventListener("click", () => {
+    if (isPlaying) {
       audio.pause();
-      player.classList.remove("is-playing");
-      playBtn.classList.remove("playing");
-      updatePlayIcon(false);
-    }
-  });
-
-  // Click on progress bar to seek
-  if (progressWrap) {
-    const bar = progressWrap.querySelector(".audio-progress-bar");
-    if (bar) {
-      bar.addEventListener("click", (e) => {
-        if (hasError || !audio.duration) return;
-        const rect = bar.getBoundingClientRect();
-        const pct = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = pct * audio.duration;
+      toggle.classList.remove("playing");
+      icon.setAttribute("data-lucide", "volume-x");
+      isPlaying = false;
+    } else {
+      audio.play().then(() => {
+        toggle.classList.add("playing");
+        icon.setAttribute("data-lucide", "volume-2");
+        isPlaying = true;
+      }).catch(() => {
+        // Autoplay blocked or file failed to load.
+        toast.error("Could not play audio");
       });
     }
-  }
+    if (window.lucide) lucide.createIcons({ nameAttr: "data-lucide" });
+  });
+
+  // If the audio fails to load, hide the toggle so it doesn't confuse visitors.
+  audio.addEventListener("error", () => {
+    toggle.style.display = "none";
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   typeTerminal();
-  initAudioPlayer();
+  initAmbientAudio();
 });

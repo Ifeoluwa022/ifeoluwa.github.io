@@ -1001,6 +1001,184 @@ td.actions { text-align: right; }
 }
 
 /* ═══════════════════════════════════════════════
+   AMBIENT AUDIO TOGGLE
+   ═══════════════════════════════════════════════ */
+.ambient-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .25s, color .25s, background .25s, box-shadow .25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ambient-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.ambient-toggle.playing {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 16px rgba(100, 255, 218, 0.15);
+}
+
+.ambient-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (pointer: coarse) {
+  .ambient-toggle { display: none; }
+}
+
+/* ═══════════════════════════════════════════════
+   VIDEO MODAL
+   ═══════════════════════════════════════════════ */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.video-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-modal-inner {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transform: scale(0.96);
+  transition: transform 0.3s var(--ease);
+}
+
+.video-modal.open .video-modal-inner {
+  transform: scale(1);
+}
+
+.video-modal video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 80vh;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.video-modal-close:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+/* Video overlay on card thumbnail */
+.thumb.has-video {
+  position: relative;
+}
+
+.thumb.has-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  transition: background 0.3s;
+}
+
+.thumb.has-video:hover::after {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.video-overlay i {
+  width: 48px;
+  height: 48px;
+  color: var(--accent);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s var(--ease), color 0.25s;
+}
+
+.thumb.has-video:hover .video-overlay i {
+  transform: scale(1.1);
+  color: #8BFFE8;
+}
+
+/* Video button in project links */
+.video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-mid);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.video-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Adjust project-links layout when video button is present */
+.project-links {
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+/* ═══════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════ */
 footer {
@@ -1091,191 +1269,7 @@ svg.lucide { width: 1.125rem; height: 1.125rem; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.14); }
 
-/* ═══════════════════════════════════════════════
-   WELCOME AUDIO SECTION
-   ═══════════════════════════════════════════════ */
-.welcome-section {
-  padding: 4rem 0 2rem;
-}
 
-.section-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: .25rem;
-}
-
-.audio-player {
-  margin-top: 2.5rem;
-  padding: 1.75rem 2rem;
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-}
-
-@media (min-width: 768px) {
-  .audio-player { flex-wrap: nowrap; }
-}
-
-/* Play button */
-.audio-play-btn {
-  width: 52px;
-  height: 52px;
-  min-width: 52px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background .25s, transform .25s var(--ease), box-shadow .25s;
-}
-
-.audio-play-btn:hover {
-  background: #8BFFE8;
-  transform: scale(1.06);
-  box-shadow: 0 4px 20px rgba(100, 255, 218, .3);
-}
-
-.audio-play-btn.playing {
-  background: var(--surface-2);
-  color: var(--accent);
-  border: 1px solid var(--border-hover);
-}
-
-.audio-play-btn.playing:hover {
-  background: var(--surface);
-  box-shadow: none;
-}
-
-.audio-play-btn svg { width: 20px; height: 20px; }
-
-/* Info */
-.audio-info {
-  min-width: 0;
-}
-
-.audio-title {
-  font-weight: 600;
-  font-size: .9rem;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.audio-subtitle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .68rem;
-  color: var(--text-3);
-  margin-top: .2rem;
-}
-
-/* Progress */
-.audio-progress-wrap {
-  flex: 1;
-  min-width: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-.audio-progress-bar {
-  width: 100%;
-  height: 4px;
-  background: rgba(255,255,255,.06);
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.audio-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--accent);
-  border-radius: 4px;
-  transition: width .1s linear;
-}
-
-.audio-progress-bar:hover .audio-progress-fill {
-  background: #8BFFE8;
-}
-
-.audio-time {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .62rem;
-  color: var(--text-3);
-}
-
-/* Animated bars */
-.audio-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 28px;
-}
-
-.audio-bars span {
-  width: 3px;
-  background: var(--accent);
-  border-radius: 2px;
-  opacity: .2;
-  height: 4px;
-  transition: height .15s ease, opacity .15s ease;
-}
-
-.audio-player.is-playing .audio-bars span {
-  opacity: .7;
-  animation: bar-bounce .6s ease-in-out infinite alternate;
-}
-
-.audio-player.is-playing .audio-bars span:nth-child(1)  { animation-delay: 0s; }
-.audio-player.is-playing .audio-bars span:nth-child(2)  { animation-delay: .08s; }
-.audio-player.is-playing .audio-bars span:nth-child(3)  { animation-delay: .16s; }
-.audio-player.is-playing .audio-bars span:nth-child(4)  { animation-delay: .24s; }
-.audio-player.is-playing .audio-bars span:nth-child(5)  { animation-delay: .32s; }
-.audio-player.is-playing .audio-bars span:nth-child(6)  { animation-delay: .18s; }
-.audio-player.is-playing .audio-bars span:nth-child(7)  { animation-delay: .06s; }
-.audio-player.is-playing .audio-bars span:nth-child(8)  { animation-delay: .28s; }
-.audio-player.is-playing .audio-bars span:nth-child(9)  { animation-delay: .12s; }
-.audio-player.is-playing .audio-bars span:nth-child(10) { animation-delay: .22s; }
-.audio-player.is-playing .audio-bars span:nth-child(11) { animation-delay: .04s; }
-.audio-player.is-playing .audio-bars span:nth-child(12) { animation-delay: .14s; }
-.audio-player.is-playing .audio-bars span:nth-child(13) { animation-delay: .26s; }
-.audio-player.is-playing .audio-bars span:nth-child(14) { animation-delay: .1s; }
-.audio-player.is-playing .audio-bars span:nth-child(15) { animation-delay: .2s; }
-
-@keyframes bar-bounce {
-  0%   { height: 4px; }
-  100% { height: 24px; }
-}
-
-/* Hint text */
-.audio-hint {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  margin-top: 1.25rem;
-  color: var(--text-3);
-  font-size: .72rem;
-}
-
-/* Error state when file missing */
-.audio-player.has-error .audio-play-btn {
-  background: var(--surface-2);
-  color: var(--text-3);
-  border: 1px solid var(--border);
-  cursor: default;
-}
-
-.audio-player.has-error .audio-title {
-  color: var(--text-3);
-}
 
 .audio-player.has-error .audio-title::after {
   content: " — add welcome.mp3 to get started";

@@ -7,6 +7,7 @@
   <title>Ifeoluwa Salau — Portfolio</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<base target="_blank">
 </head>
 <body>
   <!-- Preloader -->
@@ -29,6 +30,14 @@
   <!-- Background effects -->
   <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
   <canvas id="code-rain" aria-hidden="true"></canvas>
+
+  <!-- Ambient audio toggle -->
+  <button class="ambient-toggle" id="ambient-toggle" aria-label="Toggle ambient sound" title="Ambient sound">
+    <i data-lucide="volume-x" id="ambient-icon"></i>
+  </button>
+  <audio id="ambient-audio" loop preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg" />
+  </audio>
 
   <header class="navbar">
     <nav class="container navbar-inner" aria-label="Main navigation">
@@ -113,51 +122,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Welcome Audio Section -->
-    <section class="welcome-section">
-      <div class="container">
-        <p class="eyebrow reveal">// welcome</p>
-        <h2 class="section-title reveal">Hear my story</h2>
-        <p class="page-sub reveal" style="--delay: .1s">Press play for a quick introduction — who I am, what I'm building, and where I'm headed.</p>
-
-        <div class="audio-player glass reveal" style="--delay: .15s">
-          <audio id="welcome-audio" preload="metadata">
-            <source src="welcome.mp3" type="audio/mpeg" />
-          </audio>
-
-          <button class="audio-play-btn" id="audio-play-btn" aria-label="Play welcome audio">
-            <i data-lucide="play" id="play-icon"></i>
-          </button>
-
-          <div class="audio-info">
-            <p class="audio-title">Welcome to my portfolio</p>
-            <p class="audio-subtitle">Ifeoluwa Salau &middot; <span id="audio-duration">0:00</span></p>
-          </div>
-
-          <div class="audio-progress-wrap" id="audio-progress-wrap">
-            <div class="audio-progress-bar">
-              <div class="audio-progress-fill" id="audio-progress-fill"></div>
-            </div>
-            <div class="audio-time">
-              <span id="audio-current">0:00</span>
-              <span id="audio-total">0:00</span>
-            </div>
-          </div>
-
-          <div class="audio-bars" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <p class="audio-hint reveal font-mono" style="--delay: .25s">
-          <i data-lucide="volume-2" class="icon-sm"></i>
-          Best with headphones
-        </p>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -166,7 +130,7 @@
       <div class="footer-socials">
         <a href="https://github.com/lfeoluwa022/ifeoluwa.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
         <a href="https://www.linkedin.com/in/ifeoluwa-salau-a155783b8" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-        <a href="mailto:Ifeoluwasalau2007@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+        <a href="mailto:ifeoluwasalau2007@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
       </div>
     </div>
   </footer>

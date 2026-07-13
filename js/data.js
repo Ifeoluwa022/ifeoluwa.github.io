@@ -5,7 +5,7 @@ const profile = {
   tagline: "I build for the web — one line of code at a time.",
   welcome: "Hi, I'm Ifeoluwa.",
   bio: "I'm a Software Engineering student with a passion for web development. I enjoy turning ideas into clean, responsive websites while learning new technologies and improving my skills. Open for internships.",
-  email: "Ifeoluwasalau2007@gmail.com",
+  email: "ifeoluwasalau2007@gmail.com",
   phone: "08133675071",
   location: "Lagos · Nigeria",
   discord: "unknownuser04827",
@@ -40,6 +40,17 @@ const hobbies = [
 ];
 
 const projects = [
+  {
+    title: "SORO — Mental Wellness & Financial Resilience",
+    description:
+      "A dark-themed landing page for a mental health and financial wellness platform built for Nigerian youth. Features scroll-driven animations, interactive data visualizations, and a compassionate UX that balances emotional support with practical tools.",
+    image:
+      "https://images.unsplash.com/photo-1516307073036-4d4205895936?crop=entropy&cs=srgb&fm=jpg&q=80&w=800",
+    video: "PROJECT.mp4",
+    tags: ["HTML", "CSS", "JavaScript", "Animation"],
+    demo: "#",
+    source: "https://github.com/lfeoluwa022/ifeoluwa.github.io",
+  },
   {
     title: "Personal Portfolio Website",
     description:
